@@ -8,6 +8,11 @@ const covid19ImpactEstimator = (data) => {
     return days;
   };
 
+  const infectionsByRequestedTimeFn = (currentlyInfected, days) => {
+    const doubledFactor = (days - (days % 3)) / 3;
+    return currentlyInfected * 2 * doubledFactor * doubledFactor;
+  };
+
   function impactFn(params) {
     const objImpact = {};
     const impactDays = dayPeriodFn(params.periodType, params.timeToElapse);
@@ -26,6 +31,12 @@ const covid19ImpactEstimator = (data) => {
       objSevereImpact.currentlyInfected,
       severeDays
     );
+
+    // 15% of infectionsByRequestedTime
+    objSevereImpact.severeCasesByRequestedTime = 0.15 * objSevereImpact.infectionsByRequestedTime;
+
+    //35% of total Hosiptal beds are free
+    objSevereImpact.hospitalBedsByRequestedTime = (0.35 * params.totalHospitalBeds) - objSevereImpact.severeCasesByRequestedTime;
 
     return objSevereImpact;
   }
