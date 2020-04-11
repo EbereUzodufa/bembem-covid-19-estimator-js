@@ -10,7 +10,7 @@ const covid19ImpactEstimator = (data) => {
 
   const infectionsByRequestedTimeFn = (currentlyInfected, days) => {
     const doubledFactor = (days - (days % 3)) / 3;
-    return currentlyInfected * 2 * doubledFactor * doubledFactor;
+    return Math.floor(currentlyInfected * 2 * doubledFactor * doubledFactor);
   };
 
   const dollarsInFlightFn = (
@@ -18,7 +18,7 @@ const covid19ImpactEstimator = (data) => {
     region,
     avgDailyIncome,
     period
-  ) => (infectionsByRequestedTime * region * avgDailyIncome * period);
+  ) => Math.floor(infectionsByRequestedTime * region * avgDailyIncome * period);
 
   function impactFn(params) {
     const objImpact = {};
@@ -46,16 +46,16 @@ const covid19ImpactEstimator = (data) => {
     );
 
     // 15% of infectionsByRequestedTime
-    objSevereImpact.severeCasesByRequestedTime = 0.15 * objSevereImpact.infectionsByRequestedTime;
+    objSevereImpact.severeCasesByRequestedTime = Math.floor(0.15 * objSevereImpact.infectionsByRequestedTime);
 
-    //35% of total Hosiptal beds are free
-    objSevereImpact.hospitalBedsByRequestedTime = (0.35 * params.totalHospitalBeds) - objSevereImpact.severeCasesByRequestedTime;
+    // 35% of total Hosiptal beds are free
+    objSevereImpact.hospitalBedsByRequestedTime = Math.floor((0.35 * params.totalHospitalBeds) - objSevereImpact.severeCasesByRequestedTime);
 
     // 5% of infectionsByRequestedTime
-    objSevereImpact.casesForICUByRequestedTime = 0.05 * objSevereImpact.infectionsByRequestedTime;
+    objSevereImpact.casesForICUByRequestedTime = Math.floor(0.05 * objSevereImpact.infectionsByRequestedTime);
 
     // 2% of infectionsByRequestedTime
-    objSevereImpact.casesForVentilatorsByRequestedTime = 0.02 * objSevereImpact.infectionsByRequestedTime;
+    objSevereImpact.casesForVentilatorsByRequestedTime = Math.floor(0.02 * objSevereImpact.infectionsByRequestedTime);
 
     objSevereImpact.dollarsInFlight = dollarsInFlightFn(
       objSevereImpact.infectionsByRequestedTime,
