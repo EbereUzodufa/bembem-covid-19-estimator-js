@@ -9,31 +9,31 @@
 </head>
 <body>
     <main>
-        <div class="input-section">
+        <div class="input-section" aria-hidden="false">
             <h1 class="section-title text-center">Covid-19 Estimator</h1>
             <p class="section-subtitle text-center">Fill the form to get an estimated impact and severe impact data for Africa</p>
             <form id="frm-submit-data">
                 <div class="form-data-container">
                     <label for="population">
-                        Population
+                        Population (number)
                         <input type="number" id="population" data-population="" required>
                     </label>
                 </div>
                 <div class="form-data-container">
                     <label for="timeToElapse">
-                        Time to elapse
+                        Time to elapse (number)
                         <input type="number" id="timeToElapse" data-time-to-elapse="" required>
                     </label>
                 </div>
                 <div class="form-data-container">
                     <label for="reportedCases">
-                        Reported cases
+                        number of Reported cases
                         <input type="number" id="reportedCases" data-reported-cases="" required>
                     </label>
                 </div>
                 <div class="form-data-container">
                     <label for="totalHospitalBeds">
-                        total hospital beds
+                        number of total hospital beds
                         <input type="number" id="totalHospitalBeds" data-reported-cases="" required>
                     </label>
                 </div>
@@ -53,6 +53,13 @@
                     </button>
                 </div>
             </form>
+        </div>
+        <div class="result-section"  aria-hidden="true">
+            <button id="backToInput">
+                Back to Input
+            </button>
+            <h1 class="section-title text-center">Possible Results</h1>
+            <div id="result"></div>
         </div>
     </main>
     <footer>
