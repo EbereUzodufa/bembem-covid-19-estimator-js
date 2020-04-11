@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/named
 import covid19ImpactEstimator from './estimator.js';
 
 (function () {
@@ -31,83 +30,87 @@ import covid19ImpactEstimator from './estimator.js';
       }
     }
     return true;
-  }
+  };
 
   const validateSelectPeriod = (val) => {
     const possibleValues = ['days', 'weeks', 'months'];
-    return possibleValues.includes(val.toLowerCase())
-  }
+    return possibleValues.includes(val.toLowerCase());
+  };
 
   const addSpace = (str) => {
     let arrCapStrPos = [];
-    for (var i = 0; i < str.length; i++) {
-      var character = str.charAt(i);
+    for (let j = 0; j < str.length; j++) {
+      let character = str.charAt(j);
 
-      if (character == character.toUpperCase()) {
-        arrCapStrPos.push(i)
+      if (character === character.toUpperCase()) {
+        arrCapStrPos.push(j);
       }
     }
     let strChars = str;
-    arrCapStrPos.forEach((p, i) => {
-      const movePos = p + i;
+    arrCapStrPos.forEach((p, k) => {
+      const movePos = p + k;
       const space = ' ';
       const output = [strChars.slice(0, movePos), space, strChars.slice(movePos)].join('');
       strChars = output;
-    })
+    });
 
     return strChars;
-  }
+  };
 
   const impactList = (impactObj, title) => {
-    const div  = $d('div');
+    const div = $d('div');
     div.classList.add('possible-impact-container');
-    const h2  = $d('h2');
+    const h2 = $d('h2');
     h2.innerHTML = title;
-    const ul  = $d('ul');
+    const ul = $d('ul');
     const frag = document.createDocumentFragment();
 
-    Object.keys(impactObj).forEach(k => {
+    Object.keys(impactObj).forEach((k) => {
       const li = $d('li');
       const keyTitle = addSpace(k);
       li.innerHTML = `<strong>${keyTitle}</strong>: ${impactObj[k]}`;
-      frag.append(li)
-    })
+      frag.append(li);
+    });
     ul.append(frag);
 
     div.append(h2);
     div.append(ul);
 
     return div;
-  }
+  };
 
   const showResultSect = () => {
     inputSect.setAttribute('aria-hidden', true);
     resultSect.setAttribute('aria-hidden', false);
-  }
+  };
 
   const hideResultSect = () => {
     inputSect.setAttribute('aria-hidden', false);
     resultSect.setAttribute('aria-hidden', true);
-  }
+  };
 
-  btnBackToInput.addEventListener('click', function(e) {
+  btnBackToInput.addEventListener('click', function() {
     hideResultSect();
-  })
+  });
 
-  form.addEventListener('submit',function (e) {
+  form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    if (form.checkValidity() && validateNumber(timeToElapse.value, reportedCases.value, population.value, totalHospitalBeds.value) && validateSelectPeriod(periodType.value)) {
+    if (form.checkValidity() && validateNumber(timeToElapse.value,
+      reportedCases.value,
+      population.value,
+      totalHospitalBeds.value) && validateSelectPeriod(periodType.value)) {
+      
       iData.periodType = periodType.value;
       iData.timeToElapse = timeToElapse.value;
       iData.reportedCases = reportedCases.value;
       iData.population = population.value;
       iData.totalHospitalBeds = totalHospitalBeds.value;
 
-      // console.log('iData', iData);  
-      // console.log('result', result);  
-      // console.log('result', impactList(result.impact, 'Possible Impacts'));  
-      // console.log('result', impactList(result.severeImpact, 'Possible Severe Impacts'));  
+      // console.log('iData', iData);
+      // console.log('result', result);
+      // console.log('result', impactList(result.impact, 'Possible Impacts'));
+      // console.log('result', impactList(result.severeImpact, 'Possible Severe Impacts'));
 
       const result = covid19ImpactEstimator(iData);
 
@@ -123,7 +126,7 @@ import covid19ImpactEstimator from './estimator.js';
         }, 500);
       }
     } else {
-      alert('Fill form correctly');
+      // alert('Fill form correctly');
     }
-  })
+  });
 })();

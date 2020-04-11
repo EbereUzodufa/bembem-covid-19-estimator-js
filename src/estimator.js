@@ -48,7 +48,7 @@ const covid19ImpactEstimator = (data) => {
     // 15% of infectionsByRequestedTime
     objSevereImpact.severeCasesByRequestedTime = 0.15 * objSevereImpact.infectionsByRequestedTime;
 
-    //35% of total Hosiptal beds are free
+    // 35% of total Hosiptal beds are free
     objSevereImpact.hospitalBedsByRequestedTime = (0.35 * params.totalHospitalBeds) - objSevereImpact.severeCasesByRequestedTime;
 
     // 5% of infectionsByRequestedTime
