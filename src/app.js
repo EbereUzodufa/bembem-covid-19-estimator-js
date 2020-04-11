@@ -40,7 +40,7 @@ import covid19ImpactEstimator from './estimator.js';
   const addSpace = (str) => {
     let arrCapStrPos = [];
     for (let j = 0; j < str.length; j++) {
-      let character = str.charAt(j);
+      const character = str.charAt(j);
 
       if (character === character.toUpperCase()) {
         arrCapStrPos.push(j);
@@ -89,7 +89,7 @@ import covid19ImpactEstimator from './estimator.js';
     resultSect.setAttribute('aria-hidden', true);
   };
 
-  btnBackToInput.addEventListener('click', function() {
+  btnBackToInput.addEventListener('click', function () {
     hideResultSect();
   });
 
