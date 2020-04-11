@@ -29,11 +29,11 @@ body, main, footer {
     margin: auto;
 }
 
-form, .form-data-container, label, input, select {
+form, .form-data-container, label, input, select, .section-title, .section-subtitle, .result-section, .input-section {
     width: 100%;
 }
 
-footer, .form-data-container, label {
+main, footer, .form-data-container, label {
     display: flex;
     flex-wrap: wrap;
 }
@@ -55,6 +55,11 @@ main {
 
 h1 {
     font-size: 1.25em;
+}
+
+h2 {
+    font-size: 1.1em;
+    margin-bottom: 0.5;
 }
 
 .section-title {
@@ -80,7 +85,7 @@ input, select {
     border-radius: 0.25em;
 }
 
-button[type="submit"], footer a{
+button[type="submit"], footer a, #backToInput {
     transition: 0.3s ease-in;
 }
 
@@ -92,7 +97,7 @@ button[type="submit"] {
     padding: 1em;
     font-size: 1em;
     font-weight: 700;
-    border-radius: 1rem 1em 1em 0rem;
+    border-radius: 1rem 1em 1em 0em;
     width: 250px;
     border: 1px solid cadetblue;
     box-shadow: 3px 7px 10px rgba(0,0,0,0.25);
@@ -122,6 +127,48 @@ footer a:hover {
     padding-left: 0.125em;
 }
 
+.result-section, .input-section {
+    transition: 0.4s ease-in;
+    flex-wrap: wrap;
+    display: flex;
+    width: 100%;
+}
+
+.result-section[aria-hidden="true"], .input-section[aria-hidden="true"] {
+    display: none;
+}
+
+.possible-impact-container ul li {
+    margin-bottom: 0.5em;
+}
+
+.possible-impact-container ul li strong{
+    color: cadetblue;
+    text-transform: capitalize;
+}
+
+#backToInput {
+    background-color: rgb(95, 158, 160);
+    color: #fff;
+    padding: 1em 1.5em;
+    border: 1px solid cadetblue;
+    border-radius: 0em 1em 0em 1em;
+    box-shadow: 3px 7px 10px rgba(0,0,0,0.25);
+}
+
+#result {
+    padding: 2.5em 1em;
+    width: 100%;
+}
+
+.possible-impact-container:first-child {
+    margin-bottom: 1.5em;
+}
+
+#backToInput:hover {
+    background-color: rgba(95, 158, 160, 0.25);
+}
+
 @media screen and (min-width: 768px) {
     body {
         padding-top: 4em;
@@ -135,6 +182,10 @@ footer a:hover {
 
     h1 {
         font-size: 1.5em;
+    }
+
+    h2 {
+        font-size: 1.25em;
     }
     
 }
