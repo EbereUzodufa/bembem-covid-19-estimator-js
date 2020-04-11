@@ -13,12 +13,25 @@ const covid19ImpactEstimator = (data) => {
     return currentlyInfected * 2 * doubledFactor * doubledFactor;
   };
 
+  const dollarsInFlightFn = (
+    infectionsByRequestedTime,
+    region,
+    avgDailyIncome,
+    period
+  ) => (infectionsByRequestedTime * region * avgDailyIncome * period);
+
   function impactFn(params) {
     const objImpact = {};
     const impactDays = dayPeriodFn(params.periodType, params.timeToElapse);
     objImpact.currentlyInfected = params.reportedCases * 10;
     objImpact.infectionsByRequestedTime = infectionsByRequestedTimeFn(
       objImpact.currentlyInfected, impactDays
+    );
+    objImpact.dollarsInFlight = dollarsInFlightFn(
+      objImpact.infectionsByRequestedTime,
+      params.region.avgDailyIncomePopulation,
+      params.region.avgDailyIncomeInUSD,
+      impactDays
     );
     return objImpact;
   }
@@ -37,6 +50,19 @@ const covid19ImpactEstimator = (data) => {
 
     //35% of total Hosiptal beds are free
     objSevereImpact.hospitalBedsByRequestedTime = (0.35 * params.totalHospitalBeds) - objSevereImpact.severeCasesByRequestedTime;
+
+    // 5% of infectionsByRequestedTime
+    objSevereImpact.casesForICUByRequestedTime = 0.05 * objSevereImpact.infectionsByRequestedTime;
+
+    // 2% of infectionsByRequestedTime
+    objSevereImpact.casesForVentilatorsByRequestedTime = 0.02 * objSevereImpact.infectionsByRequestedTime;
+
+    objSevereImpact.dollarsInFlight = dollarsInFlightFn(
+      objSevereImpact.infectionsByRequestedTime,
+      params.region.avgDailyIncomePopulation,
+      params.region.avgDailyIncomeInUSD,
+      severeDays
+    );
 
     return objSevereImpact;
   }
