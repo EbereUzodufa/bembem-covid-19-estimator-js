@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend | #BuildforSDG Challenge 2020</title>
+    <meta name="description" content="Challenge for Sustainable Development Goal">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <div class="input-section" aria-hidden="false">
+            <h1 class="section-title text-center">Covid-19 Estimator</h1>
+            <p class="section-subtitle text-center">Fill the form to get an estimated impact and severe impact data for Africa</p>
+            <form id="frm-submit-data">
+                <div class="form-data-container">
+                    <label for="population">
+                        Population (number)
+                        <input type="number" id="population" data-population="" required>
+                    </label>
+                </div>
+                <div class="form-data-container">
+                    <label for="timeToElapse">
+                        Time to elapse (number)
+                        <input type="number" id="timeToElapse" data-time-to-elapse="" required>
+                    </label>
+                </div>
+                <div class="form-data-container">
+                    <label for="reportedCases">
+                        number of Reported cases
+                        <input type="number" id="reportedCases" data-reported-cases="" required>
+                    </label>
+                </div>
+                <div class="form-data-container">
+                    <label for="totalHospitalBeds">
+                        number of total hospital beds
+                        <input type="number" id="totalHospitalBeds" data-reported-cases="" required>
+                    </label>
+                </div>
+                <div class="form-data-container">
+                    <label for="periodType">
+                        Period Type
+                        <select name="periodType" id="periodType" data-period-type="" required>
+                            <option value="days">days</option>
+                            <option value="weeks">weeks</option>
+                            <option value="months">months</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="form-data-container">
+                    <button title="Click to submit data and get estimate" type="submit" data-go-estimate>
+                        Get Estimate
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="result-section"  aria-hidden="true">
+            <button id="backToInput">
+                Back to Input
+            </button>
+            <h1 class="section-title text-center">Possible Results</h1>
+            <div id="result"></div>
+        </div>
+    </main>
+    <footer>
+        <div class="text-center">
+            <p>Made with <span class="white-text">♥</span> by <a class="white-text" href="https://www.linkedin.com/in/iamebereuzodufa/" target="blank" tabindex="-1">Ebere</a></p>
+            <p>Powered by DevC Training with Andela</p> 
+            <p><small class="white-text">#BuildforSDG Challenge</small></p>
+        </div>
+    </footer>
+    <script type="module" src="app.js"></script>
+</body>
+</html>
