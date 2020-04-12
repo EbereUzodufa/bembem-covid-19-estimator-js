@@ -57,6 +57,14 @@ import covid19ImpactEstimator from './estimator.js';
     return strChars;
   };
 
+  const checkIfValueIsNegative = (value) => {
+    if (value < 0) {
+      return '<span class = "negative-text">' + value.toLocaleString() + '</span>';
+    }
+
+    return value.toLocaleString();
+  }
+
   const impactList = (impactObj, title) => {
     const div = $d('div');
     div.classList.add('possible-impact-container');
@@ -68,7 +76,8 @@ import covid19ImpactEstimator from './estimator.js';
     Object.keys(impactObj).forEach((k) => {
       const li = $d('li');
       const keyTitle = addSpace(k);
-      li.innerHTML = `<strong>${keyTitle}</strong>: ${impactObj[k]}`;
+      const keyValue = checkIfValueIsNegative(impactObj[k]);
+      li.innerHTML = `<strong>${keyTitle}</strong>: ${keyValue}`;
       frag.append(li);
     });
     ul.append(frag);

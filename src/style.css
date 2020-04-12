@@ -53,6 +53,11 @@ main {
     color: #fff;
 }
 
+.negative-text {
+    padding: 0 0.5em;
+    color: #BE3C2D;
+}
+
 h1 {
     font-size: 1.25em;
 }
